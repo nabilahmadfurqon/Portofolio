@@ -1,0 +1,941 @@
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800;900&display=swap');
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    line-height: 1.6; /* Improved line height for readability */
+}
+
+header {
+    background-color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 5%; /* Use responsive padding */
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    transition: border-bottom 0.3s ease;
+}
+
+.header-scrolled {
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    transition: box-shadow 0.3s ease;
+}
+
+.logo {
+    margin-right: 20px;
+}
+
+.logo p {
+    margin: 0;
+    font-size: 1.5rem;
+}
+
+.logo p a {
+    list-style: none;
+    text-decoration: none;
+    color: rgb(68, 68, 68);
+}
+
+nav {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center; /* Center the nav items */
+}
+.nav-menu {
+    display: flex; /* Tampilkan menu secara default */
+}
+.menu-toggle {
+    display: none; /* Sembunyikan toggle secara default */
+    cursor: pointer;
+}
+.nav-menu ul {
+    display: flex;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-menu li {
+    margin-right: 20px;
+}
+
+nav a {
+    padding: 0 10px;
+    text-decoration: none;
+    color: rgb(68, 68, 68);
+    transition: transform 0.3s ease, text-shadow 0.3s ease;
+    will-change: transform, text-shadow;
+}
+
+nav a:hover {
+    text-shadow: 0 1px 0 rgb(0, 0, 0);
+    transform: scale(1.2);
+}
+
+.contact {
+    margin-left: 20px;
+}
+
+.contact a {
+    text-decoration: none;
+    color: rgb(68, 68, 68);
+    padding: 0.75rem 1.5rem; /* Increased padding for touch targets */
+    border-radius: 10px;
+    transition: background-color 0.6s ease, transform 0.3s ease, text-shadow 0.3s ease;
+    will-change: background-color, transform, text-shadow; /* Improve performance */
+}
+
+.contact a:hover {
+    color: white;
+    background-color: rgb(34, 34, 34);
+    text-shadow: 0 1px 0 black;
+    transform: scale(1.1);
+}
+
+/* New style for header to use space-between */
+.header-content {
+    display: flex;
+    justify-content: space-between; /* Space between logo and contact */
+    width: 100%; /* Take full width */
+}
+.about-section {
+    display: flex;
+    flex-direction: row; /* Default layout */
+    align-items: center;
+    justify-content: center;
+    height: calc(100vh - 100px); /* Full height minus navbar height */
+    padding: 20px;
+    margin-top: 60px; /* Space for fixed header */
+    overflow: hidden; /* Hide overflow */
+}
+
+.text-container {
+    flex: 1; /* Flex item takes available space */
+    padding: 20px;
+    color: #333;
+    opacity: 0;
+    z-index: 1;
+    transition: transform 1s ease, opacity 1s ease;
+    font-size: 2rem; /* Default font size */
+    text-align: center; /* Center text */
+    transform: translateX(100%);
+}
+
+.button-container {
+    margin-top: 5px;
+    opacity: 0;
+    transform: translateY(60px);
+    transition: opacity 1s ease, transform 1s ease;
+    z-index: 10; /* Higher z-index */
+}
+
+.button-container.visible {
+    opacity: 1;
+    transform: translate(0, 0); /* Reset to original position */
+}
+
+.text-container.show {
+    opacity: 1; /* Show text */
+    transform: translateX(0); /* Reset position */
+}
+
+.button-container.show {
+    opacity: 1; /* Show button */
+    transform: translateY(0); /* Reset position */
+    margin-top: 20px; /* Space below button */
+}
+
+.button {
+    padding: 0.75rem 1.5rem; /* Button padding */
+    background-color: rgb(68, 68, 68); /* Button background color */
+    color: white; /* Button text color */
+    border: none; /* Remove border */
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer; /* Change cursor on hover */
+    transition: background-color 0.3s ease, transform 0.3s ease; /* Transition for hover effect */
+}
+
+.button:hover {
+    background-color: rgb(34, 34, 34); /* Darker background on hover */
+    transform: scale(1.05); /* Slightly scale up */
+}
+
+.image-container {
+    flex: 1; /* Allow image container to take available space */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: transform 1s ease;
+    height: 100%;
+    z-index: 2; /* Ensure it is higher than text container */
+    transform: translateX(-100%);
+}
+
+.image-clip {
+    clip-path: inset(2% 10% 2% 10% round 0 40% 0 40%);
+    width: 80%; /* Adjust width for responsiveness */
+}
+
+img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px; /* Rounded corners for image */
+    transition: transform 0.5s ease; /* Transition for 3D effect */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5); /* Shadow behind image */
+}
+
+.image-container.show {
+    transform: translateX(0); /* Reset position */
+    opacity: 1;
+}
+.text-container.show {
+    transform: translateX(0); /* Move to its original position */
+    opacity: 1; /* Show text */
+}
+/* Container untuk detail tentang */
+.about-details {
+    padding: 40px; 
+    margin: 60px auto; 
+    max-width: 800px; 
+    width: 90%; 
+    font-family: 'Arial', sans-serif; 
+    color: rgb(30, 30, 30); 
+    text-align: center; 
+    background-color: white; 
+    border-radius: 10px; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    transition: all 0.3s ease; 
+    display: flex; /* Use flexbox for centering */
+    flex-direction: column; /* Stack children vertically */
+    align-items: center; /* Center children horizontally */
+    justify-content: center; /* Center children vertically */
+    min-height: calc(100vh - 120px); /* Full height minus header and footer */
+}
+
+/* Gaya untuk kartu */
+.card {
+    margin-bottom: 20px;
+    background-color: white; 
+    border-radius: 15px; 
+    border: 2px solid rgb(68, 68, 68); 
+    box-shadow: inset 0 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 30px; /* Padding di dalam kartu */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transisi halus */
+}
+
+/* Efek hover untuk kartu */
+.card:hover {
+    transform: translateY(-5px); /* Sedikit terangkat saat hover */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3); /* Bayangan lebih gelap saat hover */ 
+}
+
+/* Gaya untuk paragraf dalam kartu */
+.card p {
+    line-height: 1.6; 
+    margin-bottom: 15px; 
+    font-size: 1.1rem; /* Ukuran teks sedikit lebih besar */
+}
+
+.card ul {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Menampilkan 3 item pada layar besar */
+    gap: 20px;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.card li {
+    padding: 20px; 
+    border-radius: 10px; 
+    background-color: white; 
+    border: 2px solid black;
+    text-align: center; 
+    position: relative; 
+    overflow: hidden; 
+    box-shadow: inset 0 4px 8px rgba(0, 0, 0, 0.2); /* Tambahkan ini untuk shadow kedalam */
+}
+
+/* Gaya untuk menampilkan teks di tengah */
+.card li .skill-text {
+    font-weight: bold; 
+    font-size: 1.2rem; 
+    color: rgb(68, 68, 68); 
+    position: absolute; 
+    top: 50%; 
+    left: 50%; 
+    transform: translate(-50%, -50%); /* Memindahkan teks ke tengah */
+    transition: transform 0.3s ease; /* Transisi untuk efek hover */
+}
+
+/* Gaya untuk progress bar dan persentase */
+.card .progress {
+    background-color: #e0e0e0; 
+    border-radius: 5px; 
+    overflow: hidden; 
+    height: 15px; 
+    margin: 10px 0; 
+    opacity: 0; /* Tersembunyi secara default */
+    transition: opacity 0.3s ease; 
+}
+
+.card .progress-bar {
+    background-color: rgb(69, 69, 69); 
+    height: 100%; 
+    width: 0; 
+    transition: width 0.3s ease; 
+}
+
+/* Efek hover pada item daftar */
+.card li:hover .progress {
+    opacity: 1; /* Tampilkan progress bar saat hover */
+}
+
+.card li:hover .progress-bar {
+    width: 100%; /* Tampilkan progress saat hover */
+}
+
+/* Tampilkan persentase hanya saat hover */
+.card li:hover .skill-percentage {
+    opacity: 1; /* Tampilkan persentase saat hover */
+}
+
+.skill-percentage {
+    opacity: 0; /* Tersembunyi secara default */
+    transition: opacity 0.3s ease; /* Transisi untuk muncul */
+}
+
+/* Efek hover pada teks */
+.card li:hover .skill-text {
+    transform: translate(-50%, -200%); /* Geser teks ke atas saat hover */
+}
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800;900&display=swap');
+h2 {
+    text-align: center;
+    font-size: 2rem; /* Base font size */
+}
+img {
+	max-width: 100%;
+	display: block;
+}
+
+.card-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr)); /* Lebarkan ukuran kartu */
+    gap: 20px; /* Adjust the gap between cards */
+    width: 90%;
+    margin: 0 auto; /* Center the card list */
+    padding: 0 5%;
+}
+
+.card {
+    background-color: #FFF;
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.05), 0 20px 50px 0 rgba(0, 0, 0, 0.1);
+    border-radius: 15px;
+    overflow: hidden;
+    padding: 1.25rem;
+    position: relative;
+    transition: 0.15s ease-in;
+
+    &:hover, &:focus-within {
+        box-shadow: 0 0 0 2px #5c5b5b, 0 10px 60px 0 rgba(0, 0, 0, 0.1);
+        transform: translateY(-5px);
+    }
+}
+
+.card-image {
+	border-radius: 10px;
+	overflow: hidden;
+}
+.card-image img {
+    width: 100%; /* Pastikan gambar mengisi lebar kartu */
+    height: auto; /* Sesuaikan tinggi secara proporsional */
+    object-fit: cover; /* Memastikan gambar memenuhi wadah tanpa distorsi */
+}
+
+.card-header {
+	margin-top: 1.5rem;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	a {
+		font-weight: 600;
+		font-size: 1.375rem;
+		line-height: 1.25;
+		padding-right: 1rem;
+		text-decoration: none;
+		color: inherit;
+		will-change: transform;
+		&:after {
+			content: "";
+			position: absolute;
+			left: 0;
+			top: 0;
+			right: 0;
+			bottom: 0;
+		}
+	}
+	
+	
+}
+
+.icon-button {
+	border: 0;
+	background-color: #fff;
+	border-radius: 50%;
+	width: 2.5rem;
+	height: 2.5rem;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-shrink: 0;
+	font-size: 1.25rem;
+	transition: .25s ease;
+	box-shadow: 0 0 0 1px rgba(#000, .05), 0 3px 8px 0 rgba(#000, .15);
+	z-index: 1;
+	cursor: pointer;
+	color: #565656;
+	
+	svg {
+		width: 1em;
+		height: 1em;
+	}
+	&:hover, &:focus {
+		background-color: #EC4646;
+		color: #FFF;
+	}
+}
+
+.card-footer {
+	margin-top: 1.25rem;
+	border-top: 1px solid #ddd;
+	padding-top: 1.25rem;
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+}
+
+.card-meta {	
+	display: flex;
+	align-items: center;
+	color: #787878;
+	&:first-child:after {
+		display: block;
+		content: "";
+		width: 4px;
+		height: 4px;
+		border-radius: 50%;
+		background-color: currentcolor;
+		margin-left: .75rem;
+		margin-right: .75rem;
+	}
+	svg {
+		flex-shrink: 0;
+		width: 1em;
+		height: 1em;
+		margin-right: .25em;
+	}
+}
+.projects-section {
+    padding: 40px 20px;
+    margin-top: 5%;
+}
+
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); 
+    gap: 5px;
+    max-width: 60%;
+    margin: 0 auto;
+}
+
+.project-item {
+    position: relative;
+    overflow: hidden;
+    border: 1px solid black;
+    border-radius: 5px;
+    transition: transform 0.2s;
+}
+
+.project-item:hover {
+    transform: scale(1.03);
+}
+
+.projects-grid img {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 0.2s, filter 0.3s;
+}
+
+.project-description {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    border: 1px solid black;
+    border-radius: 2px;
+    text-align: center;
+    padding: 10px;
+    transition: opacity 0.3s;
+    opacity: 0;
+}
+
+.project-item:hover img { 
+    filter: blur(2px) brightness(0.5);
+}
+
+.project-item:hover .project-description {
+    opacity: 1;
+}
+
+/* Tambahan untuk memusatkan proyek ke-7 */
+.centered-item {
+    grid-column: 1 / -1; /* Mengambil seluruh kolom */
+    justify-self: center; /* Memastikan item ditengah */
+}
+
+.contact-section {
+    padding: 60px 20px; /* Ensure adequate padding */
+    background-color: #f9f9f9; /* Light background for contrast */
+}
+
+.contact-section h2 {
+    margin-bottom: 30px;
+    font-size: 28px; /* Larger font size for headings */
+    color: #333; /* Darker color for better readability */
+}
+
+.background {
+    display: flex;
+    min-height: 100vh;
+    align-items: center; /* Center content vertically */
+}
+
+.container {
+    flex: 0 1 80%; /* Sets width to 80% of the parent */
+    max-width: 700px; /* Keeps the max width for larger screens */
+    margin: auto;
+    padding: 10px;
+}
+
+.screen {
+    position: relative;
+    background: white;
+    border-radius: 15px;
+    border: 2px solid #ccc; /* Softer border color */
+    transition: box-shadow 0.3s, transform 0.3s; /* Smooth transition for hover effect */
+}
+
+.screen:after {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 20px;
+    right: 20px;
+    bottom: 0;
+    border-radius: 15px;
+    background: rgba(255, 255, 255, 0.5); /* Subtle background */
+    z-index: -1;
+}
+
+.screen:hover {
+    box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.1), 0 10px 30px rgba(0, 0, 0, 0.2); /* Enhanced shadow */
+    transform: translateY(-5px);
+}
+
+.screen-header {
+    display: flex;
+    align-items: center;
+    padding: 15px 20px; /* Increased padding for better touch target */
+    background: rgb(114, 114, 114);
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    color: white; /* Text color */
+}
+
+.screen-header-left {
+    margin-right: auto;
+}
+
+.screen-header-button {
+    display: inline-block;
+    width: 10px; /* Slightly larger buttons */
+    height: 10px;
+    margin-right: 5px;
+    border-radius: 50%; /* Circular buttons */
+    background: white;
+}
+
+.screen-header-right {
+    display: flex;
+}
+
+.screen-header-ellipsis {
+    width: 5px; /* Slightly larger ellipsis */
+    height: 5px;
+    margin-left: 2px;
+    border-radius: 50%;
+    background: white;
+}
+
+.screen-body {
+    display: flex;
+    flex-direction: column; /* Stack items vertically */
+}
+
+.screen-body-item {
+    flex: 1;
+    padding: 40px; /* Adjusted padding */
+}
+
+.screen-body-item.left {
+    display: flex;
+    flex-direction: column;
+}
+
+.app-title {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    color: rgb(68, 68, 68);
+    font-size: 24px;
+}
+
+.app-title:after {
+    content: '';
+    display: block;
+    position: absolute;
+    left: 0;
+    bottom: -10px;
+    width: 30px; /* Slightly wider underline */
+    height: 4px;
+    background: rgb(69, 69, 69);
+}
+
+.app-contact {
+    margin-top: auto;
+    font-size: 14px;
+    color: #888;
+}
+
+.app-form-group {
+    margin-bottom: 15px;
+}
+
+.app-form-group.message {
+    margin-top: 40px;
+}
+
+.app-form-group.buttons {
+    margin-bottom: 0;
+    text-align: right;
+}
+
+.app-form-control {
+    width: 100%;
+    padding: 12px; /* Increased padding for better usability */
+    background: none;
+    border: none;
+    border-bottom: 1px solid #666;
+    color: #ddd;
+    font-size: 14px;
+    text-transform: uppercase;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.app-form-control::placeholder {
+    color: #666;
+}
+
+.app-form-control:focus {
+    border-bottom-color: #ddd;
+}
+
+.app-form-button {
+    background: rgb(67, 67, 67); /* Button background color */
+    border: none;
+    color: white; /* Text color */
+    font-size: 14px;
+    padding: 12px 20px; /* Added padding for buttons */
+    border-radius: 5px; /* Rounds the corners */
+    cursor: pointer;
+    outline: none;
+    transition: background-color 0.2s, transform 0.2s; /* Smooth transitions */
+}
+
+.app-form-button:hover {
+    box-shadow: 0 0 0 2px #5c5b5b, 0 10px 60px 0 rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px); /* Slight lift effect */
+}
+
+.app-form-control.focused {
+    border-bottom-color: #ddd;
+    transition: border-color 0.2s;
+}
+
+.success-message {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 128, 0, 0.8);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    z-index: 2000;
+    opacity: 0; /* Start hidden */
+    transition: opacity 0.5s ease; /* Smooth transition */
+    animation: fadeIn 0.5s forwards; /* Fade-in effect */
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Responsive Header */
+@media (max-width: 768px) {
+    header {
+        padding: 10px 20px;
+        display: flex; /* Use flexbox for layout */
+        align-items: center; /* Center items vertically */
+        justify-content: space-between; /* Space between logo and menu */
+    }
+
+    .logo p {
+        text-align: center;
+        font-size: 20px; /* Adjust logo size */
+    }
+
+    nav {
+        display: none; /* Hide the nav items by default */
+        flex-direction: column; /* Stack items vertically */
+        position: absolute;
+        top: 60px; /* Adjust based on header height */
+        left: 50%; /* Center horizontally */
+        transform: translateX(-50%); /* Adjust position to center */
+        background-color: white; /* Match header background */
+        width: 80%; /* Adjust width to your liking */
+        z-index: 999;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional shadow for dropdown effect */
+        border-radius: 5px; /* Optional rounded corners */
+    }
+
+    .nav-menu {
+        display: none; /* Hide menu by default */
+        flex-direction: column; /* Stack items vertically */
+        align-items: center; /* Center items in menu */
+    }
+
+    .nav-menu.active {
+        display: block; /* Show menu when active */
+        text-align: center; /* Center text when opened */
+    }
+
+    .menu-toggle {
+        display: block; /* Show toggle on small screens */
+    }
+
+    .contact {
+        margin-left: 52%;/* Align contact to the right */
+    }
+
+    nav ul {
+        padding: 0; /* Remove padding */
+        margin: 0; /* Remove margin */
+        list-style-type: none; /* Remove bullet points */
+        width: 100%; /* Ensure the list takes full width */
+        display: flex; /* Use flexbox for horizontal alignment */
+        flex-direction: column; /* Stack items vertically */
+        align-items: center; /* Center items */
+    }
+
+    nav ul li {
+        padding: 10px 0; /* Add some padding to each menu item */
+        width: 100%; /* Make li take full width */
+        text-align: center; /* Center text in each li */
+    }
+}
+/* Aturan untuk gambar kecil */
+@media (max-width: 500px) {
+    /* Anda dapat menambahkan aturan khusus untuk gambar kecil di sini jika perlu */
+    .menu-toggle {
+        display: block; /* Pastikan menu toggle ditampilkan */
+    }
+    .contact {
+        margin-left: 35%;/* Align contact to the right */
+    }
+
+}
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .projects-grid {
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Keep the existing column setup */
+        justify-items: center; /* Center items in the grid */
+        padding: 0 10px; /* Add padding for better spacing */
+    }
+    .project-item {
+        margin: 0 auto; /* Center each project item */
+        width: 90%; /* Make project items responsive */
+    }
+    .projects-grid {
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Menjaga kolom yang ada */
+        justify-items: center; /* Mengatur item di tengah */
+        padding: 0 10px; /* Menambahkan padding untuk jarak */
+        max-width: 90%; /* Memperbesar lebar grid */
+    }
+    .about-section {
+        flex-direction: column; /* Stack text and image */
+        height: auto; /* Allow height to adjust */
+        align-items: center; /* Center content */
+    }
+
+    .image-container {
+        width: 90%; /* Limit width on mobile */
+        margin-bottom: 20px; /* Space below image */
+    }
+
+    .text-container {
+        width: 90%; /* Pastikan lebar lebih kecil */
+        margin: 0 auto; /* Centering */
+        text-align: center; /* Teks juga di tengah */
+        font-size: 1.5rem; /* Ukuran font yang sesuai */
+        opacity: 1; /* Tampilkan teks */
+    }
+
+    .button-container {
+        width: 90%; /* Pastikan lebar lebih kecil */
+        margin: 20px auto; /* Centernya dan beri jarak di atas/bawah */
+        text-align: center; /* Teks tombol di tengah */
+        opacity: 1; /* Tampilkan tombol */
+        transform: translateY(0); /* Reset transformasi */
+    }
+}
+
+@media (max-width: 480px) {
+    .text-container {
+        font-size: 1.2rem; /* Even smaller font size on very small devices */
+    }
+    .projects-grid {
+        grid-template-columns: 1fr; /* Stack items in one column */
+        justify-items: center; /* Center the single column */
+    }
+
+    .project-item {
+        width: 100%; /* Mengizinkan item proyek untuk mengambil lebar penuh */
+        max-width: 100%; /* Memastikan tidak ada batasan lebar maksimum */
+        margin: 5px auto; /* Mengurangi jarak antara item proyek */
+    }
+}
+/* Responsive Card Layout */
+@media (max-width: 768px) {
+    .card-list {
+        grid-template-columns: repeat(2, 1fr); /* Two columns on medium screens */
+        justify-items: center; /* Center each card horizontally */
+        padding: 0 10px; /* Add padding to card list */
+    }
+    .about-details {
+        padding: 20px; /* Mengurangi padding untuk layar kecil */
+        margin: 30px auto; /* Mengurangi margin */
+        min-height: auto; /* Atur ulang tinggi minimum */
+    }
+    .card {
+        padding: 20px; /* Mengurangi padding dalam kartu */
+    }
+
+    .card p {
+        font-size: 1rem; /* Mengurangi ukuran font */
+    }
+
+    .card ul {
+        grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); /* Memungkinkan lebih banyak item di layar kecil */
+    }
+
+    .card li {
+        padding: 15px; /* Mengurangi padding dalam item daftar */
+    }
+
+    .card li .skill-text {
+        font-size: 1rem; /* Mengurangi ukuran teks skill */
+    }
+}
+
+@media (max-width: 480px) {
+    .about-details {
+        padding: 15px; /* Further reduce padding for very small screens */
+        font-size: 0.9rem; /* Adjust font size for small screens */
+    }
+    .card-list {
+        grid-template-columns: 1fr; /* One column on small screens */
+        padding: 0; /* Remove padding on small screens */
+    }
+
+    .card {
+        padding: 1rem; /* Reduce padding for smaller screens */
+        text-align: center; /* Center card text */
+        margin-bottom: 20px; /* Add bottom margin */
+    }
+    .card ul {
+        grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)); /* Menampilkan 6 item pada layar sangat kecil */
+    }
+
+    .card li {
+        padding: 10px; /* Mengurangi padding dalam item daftar */
+    }
+
+    .card li .skill-text {
+        font-size: 0.9rem; /* Mengurangi ukuran teks skill */
+    }
+
+    .text-container {
+        font-size: 1rem; /* Adjust font size for small screens */
+    }
+
+    .image-container img {
+        max-width: 90%; /* Ensure images are responsive */
+        height: auto; /* Maintain aspect ratio */
+    }
+}
+
+/* Responsive Form Elements */
+@media (max-width: 768px) {
+    .screen-body {
+        flex-direction: column; /* Stack columns on smaller screens */
+    }
+
+    .app-title {
+        font-size: 20px; /* Smaller title for smaller screens */
+    }
+
+    .app-contact {
+        font-size: 12px; /* Smaller contact info */
+    }
+
+    .app-form-control {
+        font-size: 12px; /* Smaller input font size */
+    }
+
+    .app-form-button {
+        font-size: 12px; /* Smaller button font size */
+    }
+}
+
+/* Adjustments for smaller devices */
+@media (max-width: 320px) {
+    .screen-body-item.left {
+        padding: 20px; /* Adjust padding for very small screens */
+    }
+
+    .app-title {
+        font-size: 22px; /* Reduce title size */
+    }
+}
